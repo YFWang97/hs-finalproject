@@ -41,12 +41,14 @@ module buffer_slots (
 					outputs <= inputs;
 					valid	<= 1;
 				end else begin
+					valid <= 0;
 					stall_slots[wr_ptr] <= inputs;
 					wr_ptr 	<= wr_ptr + 'd1;
 					count	<= count + 'd1;
 				end
 			end else begin
 				if (count == 'd0) begin
+					valid <= 0;
 					outputs <= 'hFFFFFFFF;
 				end 
 				else if (count != 'd0 && !stall) begin
